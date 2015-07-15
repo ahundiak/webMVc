@@ -22,11 +22,12 @@ If you got all that working (and sorry if I didn't explain in more detail to hel
 
 ### Things I'd still like to do
 
-1. Improve the parameter system. It totally sucks currently and is in the wrong place. It needs to be part of the request.  
-2. Get this working with a proper request/ response system like Symfony's HTTPFoundation component.
-2. Add a real templating system like Twig.
-3. Work on a better example app and pull it out into its own project
-4. I am sure more will hit me later.....
+1. Add tests.
+2. Improve the parameter system. It totally sucks currently and is in the wrong place. It needs to be part of the request.  
+3. Get this working with a proper request/ response system like Symfony's HTTPFoundation component.
+4. Add a real templating system like Twig.
+5. Work on a better example app and pull it out into its own project
+6. I am sure more will hit me later.....
 
 At any rate, again, this is totally experimental and not even close to production ready.
 
