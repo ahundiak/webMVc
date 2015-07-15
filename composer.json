@@ -1,0 +1,21 @@
+{
+    "name": "SkooppaOS/webMVc",
+    "description": "An experiment in web MVC",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Scott Molinari",
+            "email": "scott.molinari@skooppa.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "4.7.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "SkooppaOS\\webMVc\\": "src"
+        }
+    }
+}
