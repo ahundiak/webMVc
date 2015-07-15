@@ -30,3 +30,7 @@ If you got all that working (and sorry if I didn't explain in more detail to hel
 
 At any rate, again, this is totally experimental and not even close to production ready.
 
+If you get it running and would like to help out, feel free to make a PR. 
+
+And as always, Have Fun! :smile:
+
