@@ -6,7 +6,7 @@
 
 use SkooppaOS\webMVc\ObjectParameters;
 use SkooppaOS\webMVc\Request as Request;
-//require_once('ObjectParameters.php');
+
 
 
 class ClockModel

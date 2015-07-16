@@ -1,10 +1,10 @@
 <?php
 namespace SkooppaOS\webMVc;
 /*
- * View class for creating an output 
+ * View class for creating an output
  *
  */
-use SkooppaOS\webMVc\Model as Model;
+
 
 class View {
 

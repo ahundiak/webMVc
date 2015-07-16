@@ -1,5 +1,7 @@
 <?php
+
 namespace SkooppaOS\webMVc;
+
 /*
  * Create the Request object from global variables.
  */

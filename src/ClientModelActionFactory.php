@@ -1,4 +1,5 @@
 <?php
+
 namespace SkooppaOS\webMVc;
 /*
  * A stimple factory to build our clientModel's action classes like ObjectUpdateModel, ObjectCreateModel, ObjectDeleteModel

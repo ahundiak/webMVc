@@ -1,5 +1,7 @@
 <?php
+
 namespace SkooppaOS\webMVc;
+
 /*
  * A stimple factory to build our clientModels
  *

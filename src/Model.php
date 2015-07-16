@@ -5,8 +5,6 @@ namespace SkooppaOS\webMVc;
  *
  */
 
-require_once('ClientModelFactory.php');
-
 
 
 class Model {

@@ -5,8 +5,6 @@ namespace SkooppaOS\webMVc;
  *
  */
 
-use SkooppaOS\webMVc\ClientModelActionFactory;
-
 
 class Controller
 {
