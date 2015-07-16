@@ -22,7 +22,7 @@ If you go to "http://www.your.site.com/clock/ntp/date-only", you'll get a differ
 
 ### Things I'd still like to do
 
-1. Add tests.
+1. Add tests and improve documentation of classes and methods. Mainly methods.
 2. Improve the parameter system. It totally sucks currently and is in the wrong place. It needs to be part of the request.  
 3. Get this working with a proper request/ response system like Symfony's HTTPFoundation component.
 4. Add a real templating system like Twig.

@@ -1,15 +1,15 @@
 <?php
 namespace SkooppaOS\webMVc;
 /*
- * View class for creating an output
+ * View class for creating an output 
  *
  */
-
+use SkooppaOS\webMVc\Model as Model;
 
 class View {
 
 	private $template;
-        public $headers;
+    public $headers;
 
 
 	public function __construct(Request $request)
@@ -17,9 +17,9 @@ class View {
             $this->template = $request->object . ".html.php";
 	}
 
-	public function render($model)
+	public function render(Model $model)
 	{
-            $headers = [];
+            $this->headers = array();
             ob_start();
             require_once __DIR__.'/templates/'.$this->template;
 
