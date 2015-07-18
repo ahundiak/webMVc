@@ -4,12 +4,11 @@
  *
  */
 
-use SkooppaOS\webMVc\ObjectParameters;
 use SkooppaOS\webMVc\Request as Request;
 
 
 
-class ClockModel
+class Clock
 {
 
     private $request;
@@ -17,27 +16,15 @@ class ClockModel
                           'America/New_York' => 'New York',
                           'America/Los_Angeles' => 'Los Angeles'];
 
-    // this is the URL structure. The first elements is always the object, everything after the object will be your object parameters
-    // we'll need to come up with a more flexible method later
-    public $urlPathMap = '/clock/dataSource/dateFormat';
-
-    // since you have them in your path map above, you must also declare the variable defaults! This should also be automated!
-    public $objectParams = ['dataSource' => 'default',
-                              'dateFormat' => 'default'];
     public $timezone;
     public $submitted = false;
     public $time;
+    public $parameters;
 
     public function __construct(Request $request)
     {
         $this->request = $request;
-        $this->getObjectParams();
-    }
-
-    private function getObjectParams()
-    {
-        $objectParameters = new ObjectParameters($this->request, $this->urlPathMap, $this->objectParams);
-        $this->objectParams = $objectParameters->parameters;
+        $this->parameters = $request->parameters;
     }
 
     public function isValid($post)
@@ -47,12 +34,12 @@ class ClockModel
 
     public function getTime()
     {   //var_dump($this->objectParams->parameters);
-         if ( $this->objectParams['dataSource'] === 'default' ) {
+         if ( $this->request->parameters['dataSource'] === 'default' ) {
             $timezone = new DateTimeZone($this->timezone);
             $date = new DateTime;
             $date->setTimeZone($timezone);
             return $date;
-        }elseif (  $this->objectParams['dataSource'] === 'ntp' ){
+        }elseif (  $this->request->parameters['dataSource'] === 'ntp' ){
             $date = $this->getNTPTime();
             return $date;
         }
@@ -60,7 +47,7 @@ class ClockModel
 
     public function getNTPTime()
     {
-        // go and get the time from some NTP server (for now just do the same as default as an example)
+        // go and get the time from some NTP server (for we just doing the same as the default as an example)
         $timezone = new DateTimeZone($this->timezone);
         $date = new DateTime;
         $date->setTimeZone($timezone);

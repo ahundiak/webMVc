@@ -12,7 +12,7 @@ class ClientModelFactory
 {
     public static function build(Request $request)
     {
-        $class = (ucfirst($request->object))."Model";
+        $class = (ucfirst($request->object));
         require_once __DIR__.'/models/'.$request->object.'/'. $class .'.php';
         if (class_exists($class)) {
             return new $class($request);

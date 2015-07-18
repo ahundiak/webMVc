@@ -1,9 +1,9 @@
 
  <p>See what time it is!</p>
 
-	<form action="/clock" method="post">
+	<form action="<?php echo $model->request->path; ?>" method="post">
         <?php
-        foreach ($model->clock->objectParams as $key => $value) { ?>
+        foreach ($model->clock->parameters as $key => $value) { ?>
             <input type="hidden" name="<?php echo $key; ?>" value="<?php echo $value; ?>">
         <?php
         }
@@ -24,10 +24,10 @@ if ($model->clock->submitted) { ?>
 	The time in <em><?php echo $model->clock->getCity(); ?></em> is
         <strong>
         <?php
-    if ($model->clock->objectParams['dateFormat'] === 'date-only') {
+    if ($model->clock->parameters['dateFormat'] === 'date-only') {
         echo $model->clock->getTime()->format('Y-m-d');
 
-    }elseif ($model->clock->objectParams['dateFormat'] == 'default') {
+    }elseif ($model->clock->parameters['dateFormat'] == 'default') {
         echo $model->clock->getTime()->format('Y-m-d H:i:s');
         ?>
         </strong>

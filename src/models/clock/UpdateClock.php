@@ -8,7 +8,7 @@
 use SkooppaOS\webMVc\Model as Model;
 use SkooppaOS\webMVc\Request as Request;
 
-class UpdateClockModel
+class UpdateClock
 {
     public function __construct(Model $model, Request $request)
     {
@@ -17,5 +17,4 @@ class UpdateClockModel
             $model->clock->timezone = $request->postData['timezone'];
         }
     }
-
 }

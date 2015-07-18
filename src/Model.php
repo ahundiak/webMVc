@@ -7,15 +7,17 @@ namespace SkooppaOS\webMVc;
 
 
 
-class Model {
+class Model
+{
 
-    private $request;
+    public $request;
     public $clientModelName;
 
     public function __construct(Request $request)
     {
         $this->request = $request;
         $this->clientModelName = $this->request->object;
+        $this->isAuthorized();
         $this->buildClientModel();
 
     }
@@ -24,6 +26,11 @@ class Model {
     {
         $this->{$this->clientModelName} = ClientModelFactory::build($this->request);
         return $this->{$this->clientModelName};
+    }
+
+    public function isAuthorized()
+    {
+
     }
 
 }
