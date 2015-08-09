@@ -8,7 +8,9 @@ One of the other ideas of this type of direction is to get rid of the need for "
 
 Currently, there is a clock example in the repo, which was made up through [one of the discussions on Sitepoint.com](http://community.sitepoint.com/t/mvc-refactor-take-2/194004/77), which led me to this kind of thinking to begin with. 
 
-I have no idea if this is going to work. This is why the project is purely an experiment. 
+UPDATE: There is now a blog example too with a generic admin section. The authentication system is not a proper one. It is just there for example purposes. 
+
+This project is purely an experimental, to prove that a very thin controller is possible. 
 
 ### Installation
 
