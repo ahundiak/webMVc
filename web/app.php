@@ -2,7 +2,6 @@
 
 /*
  * Generic entry point/ front controller.
-
  */
 
 use SkooppaOS\webMVc\HTTPConverter;
@@ -14,6 +13,3 @@ $httpConverter = new HTTPConverter();
 $request = $httpConverter->createRequest();
 $response = $httpConverter->handleRequest();
 $httpConverter->sendResponse();
-
-
-

@@ -1,5 +1,6 @@
 <?php
 namespace SkooppaOS\webMVc;
+
 /**
  * A class which loads the client configuration
  *
@@ -12,14 +13,9 @@ class Configuration
     /**
      *
      */
-    public function __construct($config)
+    public function __construct()
     {
-        // make sure we are only loading the config file once
-        if ($config !== null) {
-            $this->configuration = $config;
-        } else {
-            include_once (__DIR__ . '/../config/config.php');
-            $this->configuration =& $config;
-        }
+        include_once (__DIR__ . '/../config/config.php');
+        $this->configuration =& $config;
     }
 }

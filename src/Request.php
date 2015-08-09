@@ -1,48 +1,66 @@
 <?php
-
 namespace SkooppaOS\webMVc;
 
 /*
- * Create the Request object from global variables.
+ * Class for building the Request object.
  */
 
 class Request
 {
-    public $object;
-    public $method;
-    public $path;
-    public $postData;
-    public $urlParams;
-    public $parameters;
-    public $configuration;
+    private $object;
+    private $redirectObject;
+    public  $method;
+    public  $path;
+    public  $postData;
+    public  $urlParams;
+    public  $parameters;
+    public  $configuration;
+    public  $session;
+    public  $refreshPage = false;
+    public  $firewall;
 
+
+
+    /**
+     * Constructor
+     *
+     */
     public function __construct()
     {
         $this->filterPostData();
-        $this->setMethod();
+        $this->setMethod($this->method);
         $this->setObject();
+        $this->setRedirectObject();
         $this->setURLParams();
         $this->setParameters();
+        $this->initializeSession();
+        $this->cleanup();
     }
 
 
     /**
-     * This will get our client configuration.
+     * This will get our client's configuration.
      *
      * @return Configuration
      */
     private function getConfiguration()
     {
-         $this->configuration = new Configuration($this->configuration);
-         return $this->configuration;
+        $this->configuration = new Configuration($this->configuration);
+        return $this->configuration;
     }
 
     /**
-     *
+     * Setting the method of the system, from the input or client parameters
+     * @param $newMethod
      */
-    private function setMethod()
+    private function setMethod($newMethod = null)
     {
-        if ( ! isset($this->postData['method'] )) {
+        if($newMethod !== null) {
+            $this->method = $newMethod;
+            return;
+        }
+
+        if (!isset($this->postData['method'])) {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'POST':
                     $this->method = 'update';
@@ -69,14 +87,55 @@ class Request
     }
 
     /**
+     * @return mixed
+     */
+    public function getObject()
+    {
+        return $this->object;
+    }
+
+    /**
      *  Setting the object of our application. Currently assumes the object is always the first part of the
      *  URL path like /clock or /blog
      *
+     * @param null $object
      */
-    private function setObject()
+    public function setObject($object = null)
     {
+        if ($object !== null) {
+            $this->object = $object;
+            return;
+        }
         $urlElements = explode('/', $_SERVER['REQUEST_URI']);
-        $this->object = $urlElements[1];
+        if ($urlElements[1] !== '') {
+            $this->object = $urlElements[1];
+            return;
+        }
+        // if no object, go to index
+        $this->object = 'index';
+    }
+
+    public function setRedirectObject($redirectObject = null)
+    {
+        if ($redirectObject !== null) {
+            $this->redirectObject = $redirectObject;
+            return;
+        }
+
+        if(isset($this->postData['redirectObject'])) {
+            $this->redirectObject = $this->postData['redirectObject'];
+            return;
+        }
+
+        $this->redirectObject = $this->getObject();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRedirectObject()
+    {
+        return $this->redirectObject;
     }
 
     /**
@@ -91,7 +150,7 @@ class Request
     }
 
     /**
-     *  Getting the rest of the client parameters
+     *  Setting the rest of the parameters
      */
     private function setParameters()
     {
@@ -105,11 +164,33 @@ class Request
      */
     private function filterPostData()
     {
-        //no filtering yet, but you get the point
+        //@todo - No filtering yet. If this ever does become a framework, this needs updating badly!!!
         $this->postData = $_POST;
-
     }
 
+    /**
+     *
+     */
+    public function initializeSession()
+    {
+        session_start();
+        if (isset($_SESSION)) {
+            $this->session = $_SESSION;
+            if (empty($this->session)) {
+                $this->session['loggedIn'] = '';
+            }
+        } else {
+            $this->session = '';
+        }
+    }
+
+    /**
+     *
+     */
+    public function setSession()
+    {
+        $_SESSION = $this->session;
+    }
 
     /**
      * @return bool
@@ -117,7 +198,7 @@ class Request
     public function isWrite()
     {
 
-        return $this->method == 'update' OR $this->method == 'create' OR $this->method =='delete' ? true : false;
+        return $this->method == 'update' OR $this->method == 'create' OR $this->method == 'delete' ? true : false;
 
     }
 
@@ -126,7 +207,23 @@ class Request
      */
     public function isRead()
     {
-        return $this->method == 'read'? true : false;
+        return $this->method == 'read' ? true : false;
+    }
+
+    /**
+     *
+     */
+    public function refreshPage()
+    {
+        $this->refreshPage = true;
+    }
+
+    /**
+     *
+     */
+    private function cleanup()
+    {
+        unset($this->configuration);
     }
 
 }

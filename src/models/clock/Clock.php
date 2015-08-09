@@ -1,12 +1,11 @@
 <?php
+namespace models\clock;
 
 /* Our clock model class
  *
  */
 
-use SkooppaOS\webMVc\Request as Request;
-
-
+use SkooppaOS\webMVc\Request;
 
 class Clock
 {
@@ -27,16 +26,11 @@ class Clock
         $this->parameters = $request->parameters;
     }
 
-    public function isValid($post)
-    {
-        return (null !== isset($post['timezone'])) ? true : false;
-    }
-
     public function getTime()
-    {   //var_dump($this->objectParams->parameters);
+    {
          if ( $this->request->parameters['dataSource'] === 'default' ) {
-            $timezone = new DateTimeZone($this->timezone);
-            $date = new DateTime;
+            $timezone = new \DateTimeZone($this->timezone);
+            $date = new \DateTime;
             $date->setTimeZone($timezone);
             return $date;
         }elseif (  $this->request->parameters['dataSource'] === 'ntp' ){
@@ -47,9 +41,9 @@ class Clock
 
     public function getNTPTime()
     {
-        // go and get the time from some NTP server (for we just doing the same as the default as an example)
-        $timezone = new DateTimeZone($this->timezone);
-        $date = new DateTime;
+        // go and get the time from some NTP server (for now, we doing the same as the default, as an example)
+        $timezone = new   \DateTimeZone($this->timezone);
+        $date = new \DateTime;
         $date->setTimeZone($timezone);
         return $date;
     }

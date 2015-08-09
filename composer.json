@@ -15,7 +15,8 @@
     },
     "autoload": {
         "psr-4": {
-            "SkooppaOS\\webMVc\\": "src"
+            "SkooppaOS\\webMVc\\": "src",
+            "models\\": "src/models"
         }
     }
 }

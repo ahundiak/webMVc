@@ -1,1 +1,0 @@
-<p>This will be the blog admin page!</p>
