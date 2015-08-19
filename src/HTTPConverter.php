@@ -29,7 +29,7 @@ class HTTPConverter
      */
     public function createRequest()
     {
-        $this->request = new Request();
+        return $this->request = new Request();
     }
 
     /**

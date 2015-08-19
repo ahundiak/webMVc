@@ -173,7 +173,7 @@ class Request
      */
     public function initializeSession()
     {
-        session_start();
+        @session_start();
         if (isset($_SESSION)) {
             $this->session = $_SESSION;
             if (empty($this->session)) {
