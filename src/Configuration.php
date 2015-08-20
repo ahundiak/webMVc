@@ -15,7 +15,8 @@ class Configuration
      */
     public function __construct()
     {
-        include_once (__DIR__ . '/../config/config.php');
+        require (__DIR__ . '/../config/config.php');
         $this->configuration =& $config;
+
     }
 }
